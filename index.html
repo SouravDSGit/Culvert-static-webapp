@@ -64,9 +64,9 @@
                 <select class="dropdown-select" id="regionSelect" onchange="navigateToRegion()">
                     <option value="">-- Select a Region --</option>
                     <option value="santee">Santee Experimental Forest</option>
-                    <option value="region2">Blue Ridge Mountains</option>
-                    <option value="region3">Coastal Plains</option>
-                    <option value="region4">Piedmont Region</option>
+                    <option value="hubbard">Hubbard Brook Experimental Forest</option>
+                    <option value="tallulah">Tallulah River, Georgia</option>
+                    <option value="tallahassee">Tallahassee Experimental Forest, Florida</option>
                 </select>
             </div>
 
@@ -74,12 +74,18 @@
             <div class="region-grid">
                 <!-- Santee Region Card -->
                 <a href="regions/santee.html" class="region-card" target="_blank">
-                    <img src="images/santee_thumbnail.jpg" alt="Santee Experimental Forest" class="region-thumbnail" 
-                         onerror="this.src='https://via.placeholder.com/400x200/1a1a1a/6366f1?text=Santee+Forest'" />
+                    <div class="region-thumbnail-container">
+                        <img src="images/santee_thumbnail.jpg" alt="Santee Experimental Forest" class="region-thumbnail" 
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                        <div class="thumbnail-fallback santee-fallback">
+                            <div class="fallback-icon">🌲</div>
+                            <div class="fallback-text">Santee Forest</div>
+                        </div>
+                    </div>
                     <div class="region-info">
                         <h3 class="region-title">Santee Experimental Forest</h3>
                         <p class="region-description">
-                            Comprehensive watershed analysis and culvert vulnerability assessment for the Santee Experimental Forest region, including post-wildfire debris flow evaluation.
+                            Comprehensive watershed analysis and culvert vulnerability assessment for the Santee Experimental Forest region in South Carolina, focusing on Coastal Plain forest ecosystems and post-wildfire debris flow evaluation.
                         </p>
                         <span class="view-btn">
                             <i class="bi bi-geo-alt-fill"></i>
@@ -88,43 +94,60 @@
                     </div>
                 </a>
 
-                <!-- Placeholder Region Cards -->
-                <div class="region-card" style="opacity: 0.6; cursor: not-allowed;">
-                    <img src="https://via.placeholder.com/400x200/1a1a1a/8b5cf6?text=Blue+Ridge" alt="Blue Ridge Mountains" class="region-thumbnail" />
+                <!-- Hubbard Brook Region Card -->
+                <div class="region-card coming-soon">
+                    <div class="region-thumbnail-container">
+                        <div class="thumbnail-fallback hubbard-fallback">
+                            <div class="fallback-icon">🏔️</div>
+                            <div class="fallback-text">Hubbard Brook</div>
+                        </div>
+                    </div>
                     <div class="region-info">
-                        <h3 class="region-title">Blue Ridge Mountains</h3>
+                        <h3 class="region-title">Hubbard Brook Experimental Forest</h3>
                         <p class="region-description">
-                            Mountainous terrain analysis focusing on steep slope vulnerability and high-elevation watershed characteristics.
+                            Long-term ecosystem research site in New Hampshire's White Mountains, focusing on northern hardwood forest watersheds, stream chemistry, and climate change impacts on montane forest hydrology and biogeochemical cycles.
                         </p>
-                        <span class="view-btn" style="opacity: 0.5;">
+                        <span class="view-btn coming-soon-btn">
                             <i class="bi bi-clock"></i>
                             Coming Soon
                         </span>
                     </div>
                 </div>
 
-                <div class="region-card" style="opacity: 0.6; cursor: not-allowed;">
-                    <img src="https://via.placeholder.com/400x200/1a1a1a/ec4899?text=Coastal+Plains" alt="Coastal Plains" class="region-thumbnail" />
+                <!-- Tallulah River Region Card -->
+                <div class="region-card coming-soon">
+                    <div class="region-thumbnail-container">
+                        <div class="thumbnail-fallback tallulah-fallback">
+                            <div class="fallback-icon">🏞️</div>
+                            <div class="fallback-text">Tallulah River</div>
+                        </div>
+                    </div>
                     <div class="region-info">
-                        <h3 class="region-title">Coastal Plains</h3>
+                        <h3 class="region-title">Tallulah River, Georgia</h3>
                         <p class="region-description">
-                            Low-lying coastal watershed evaluation with focus on tidal influence and storm surge impact assessments.
+                            Southeastern Appalachian watershed analysis focusing on steep terrain vulnerability, gorge hydrology, and the impacts of extreme precipitation events on culvert infrastructure in mountainous Georgia terrain.
                         </p>
-                        <span class="view-btn" style="opacity: 0.5;">
+                        <span class="view-btn coming-soon-btn">
                             <i class="bi bi-clock"></i>
                             Coming Soon
                         </span>
                     </div>
                 </div>
 
-                <div class="region-card" style="opacity: 0.6; cursor: not-allowed;">
-                    <img src="https://via.placeholder.com/400x200/1a1a1a/10b981?text=Piedmont+Region" alt="Piedmont Region" class="region-thumbnail" />
+                <!-- Tallahassee Region Card -->
+                <div class="region-card coming-soon">
+                    <div class="region-thumbnail-container">
+                        <div class="thumbnail-fallback tallahassee-fallback">
+                            <div class="fallback-icon">🌴</div>
+                            <div class="fallback-text">Tallahassee Forest</div>
+                        </div>
+                    </div>
                     <div class="region-info">
-                        <h3 class="region-title">Piedmont Region</h3>
+                        <h3 class="region-title">Tallahassee Experimental Forest, Florida</h3>
                         <p class="region-description">
-                            Rolling hills and transitional zone analysis with mixed forest and agricultural land use patterns.
+                            Longleaf pine ecosystem research site in north Florida, examining watershed dynamics in sandy soils, fire effects on hydrology, and storm water management in subtropical forest environments with frequent hurricane impacts.
                         </p>
-                        <span class="view-btn" style="opacity: 0.5;">
+                        <span class="view-btn coming-soon-btn">
                             <i class="bi bi-clock"></i>
                             Coming Soon
                         </span>
@@ -158,7 +181,7 @@
                     window.open('regions/santee.html', '_blank');
                 } else {
                     // For future regions, you can add more conditions here
-                    alert('This region is coming soon!');
+                    alert(`The ${select.options[select.selectedIndex].text} region is coming soon!`);
                 }
                 // Reset the dropdown
                 select.value = '';
@@ -172,6 +195,21 @@
                 document.querySelector(this.getAttribute('href')).scrollIntoView({
                     behavior: 'smooth'
                 });
+            });
+        });
+
+        // Add loading states and error handling for images
+        document.querySelectorAll('.region-thumbnail').forEach(img => {
+            img.addEventListener('load', function() {
+                this.style.opacity = '1';
+            });
+            
+            img.addEventListener('error', function() {
+                this.style.display = 'none';
+                const fallback = this.nextElementSibling;
+                if (fallback && fallback.classList.contains('thumbnail-fallback')) {
+                    fallback.style.display = 'flex';
+                }
             });
         });
     </script>
