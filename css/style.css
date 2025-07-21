@@ -227,16 +227,101 @@ header {
     color: inherit;
 }
 
-.region-thumbnail {
+.region-card.coming-soon {
+    opacity: 0.7;
+    cursor: default;
+    pointer-events: none;
+}
+
+.region-card.coming-soon:hover {
+    transform: none;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.05);
+}
+
+.region-thumbnail-container {
+    position: relative;
     width: 100%;
     height: 200px;
+    overflow: hidden;
+}
+
+.region-thumbnail {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     transition: var(--transition);
+    opacity: 0;
 }
 
 .region-card:hover .region-thumbnail {
     transform: scale(1.1);
     filter: brightness(1.2);
+}
+
+.thumbnail-fallback {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.2));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: var(--transition);
+}
+
+/* Individual region fallback styles */
+.santee-fallback {
+    background: linear-gradient(135deg, 
+        rgba(34, 139, 34, 0.3), 
+        rgba(0, 100, 0, 0.3));
+}
+
+.hubbard-fallback {
+    background: linear-gradient(135deg, 
+        rgba(70, 130, 180, 0.3), 
+        rgba(25, 25, 112, 0.3));
+}
+
+.tallulah-fallback {
+    background: linear-gradient(135deg, 
+        rgba(34, 139, 34, 0.3), 
+        rgba(0, 128, 128, 0.3));
+}
+
+.tallahassee-fallback {
+    background: linear-gradient(135deg, 
+        rgba(255, 140, 0, 0.3), 
+        rgba(255, 69, 0, 0.3));
+}
+
+.fallback-icon {
+    font-size: 48px;
+    margin-bottom: 12px;
+    animation: float 3s ease-in-out infinite;
+}
+
+.fallback-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-fg-muted);
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+.region-card:hover .thumbnail-fallback {
+    transform: scale(1.05);
 }
 
 .region-info {
@@ -279,6 +364,20 @@ header {
     text-decoration: none;
 }
 
+.coming-soon-btn {
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.1), 
+        rgba(255, 255, 255, 0.05));
+    color: var(--color-fg-muted);
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.coming-soon-btn:hover {
+    transform: none;
+    box-shadow: none;
+}
+
 .section-title {
     text-align: center;
     font-size: 32px;
@@ -300,6 +399,43 @@ header {
     margin-right: auto;
 }
 
+/* Loading states */
+.region-thumbnail[src] {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.region-thumbnail.loaded {
+    opacity: 1;
+}
+
+/* Image error handling */
+.region-thumbnail.error {
+    display: none;
+}
+
+/* Accessibility improvements */
+.region-card:focus {
+    outline: 2px solid var(--color-accent-primary);
+    outline-offset: 2px;
+}
+
+.view-btn:focus {
+    outline: 2px solid rgba(255, 255, 255, 0.5);
+    outline-offset: 2px;
+}
+
+/* Enhanced animations */
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+.region-card.loading .thumbnail-fallback {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+/* Responsive improvements */
 @media (max-width: 768px) {
     .banner h1 {
         font-size: 32px;
@@ -318,5 +454,50 @@ header {
     .header-logo {
         max-height: 40px;
         max-width: 60px;
+    }
+
+    .region-thumbnail-container {
+        height: 180px;
+    }
+
+    .fallback-icon {
+        font-size: 36px;
+        margin-bottom: 8px;
+    }
+
+    .fallback-text {
+        font-size: 12px;
+    }
+
+    .region-selector {
+        padding: 24px;
+        margin: 24px auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .region-thumbnail-container {
+        height: 160px;
+    }
+
+    .fallback-icon {
+        font-size: 32px;
+        margin-bottom: 6px;
+    }
+
+    .fallback-text {
+        font-size: 11px;
+    }
+
+    .region-info {
+        padding: 20px;
+    }
+
+    .region-title {
+        font-size: 18px;
+    }
+
+    .region-description {
+        font-size: 13px;
     }
 }
